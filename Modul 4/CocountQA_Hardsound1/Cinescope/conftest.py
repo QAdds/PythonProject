@@ -1,7 +1,7 @@
 import requests
 from constants import BASE_URL, HEADERS, REGISTER_ENDPOINT, LOGIN_ENDPOINT
 import pytest
-from custom_requester import DataGenerator
+from custom_requester.data_generator import DataGenerator
 
 @pytest.fixture(scope="session")
 def test_user():

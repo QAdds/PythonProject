@@ -1,5 +1,5 @@
 import requests
-from tests.constants import BASE_URL, HEADERS, REGISTER_ENDPOINT
+from constants import BASE_URL, HEADERS, REGISTER_ENDPOINT
 
 
 class TestAuthAPI:
