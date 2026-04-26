@@ -2,7 +2,7 @@ import pytest
 import requests
 from constants import BASE_URL, HEADERS, REGISTER_ENDPOINT,  LOGIN_ENDPOINT
 from custom_requester.custom_requester import CustomRequester
-from Cinescope.api.api_manager import ApiManager
+from api.api_manager import ApiManager
 
 class TestAuthAPI:
     def test_register_user(self, api_manager: ApiManager, test_user):
@@ -32,4 +32,3 @@ class TestAuthAPI:
         # Проверки
         assert "accessToken" in response_data, "Токен доступа отсутствует в ответе"
         assert response_data["user"]["email"] == registered_user["email"], "Email не совпадает"
-

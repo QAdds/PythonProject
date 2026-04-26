@@ -1,3 +1,4 @@
+
 from custom_requester.custom_requester import CustomRequester
 from constants import LOGIN_ENDPOINT, REGISTER_ENDPOINT
 
@@ -34,7 +35,6 @@ class AuthAPI(CustomRequester):
             data=login_data,
             expected_status=expected_status
         )
-
     def authenticate(self, user_creds):
         login_data = {
             "email": user_creds[0],
