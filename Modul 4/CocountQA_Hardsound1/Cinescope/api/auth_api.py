@@ -1,6 +1,6 @@
 
 from custom_requester.custom_requester import CustomRequester
-from constants import LOGIN_ENDPOINT, REGISTER_ENDPOINT
+from constants import LOGIN_ENDPOINT, REGISTER_ENDPOINT, BASE_URL
 
 class AuthAPI(CustomRequester):
     """
@@ -8,7 +8,7 @@ class AuthAPI(CustomRequester):
       """
 
     def __init__(self, session):
-        super().__init__(session=session, base_url="https://auth.dev-cinescope.coconutqa.ru/")
+        super().__init__(session=session, base_url=BASE_URL)
 
     def register_user(self, user_data, expected_status=201):
         """
@@ -23,7 +23,7 @@ class AuthAPI(CustomRequester):
             expected_status=expected_status
         )
 
-    def login_user(self, login_data, expected_status=201):
+    def login_user(self, login_data, expected_status=200):
         """
         Авторизация пользователя.
         :param login_data: Данные для логина.
