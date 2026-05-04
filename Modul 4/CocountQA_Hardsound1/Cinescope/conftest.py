@@ -34,6 +34,22 @@ def test_user():
         "roles": ["USER"]
     }
 
+@pytest.fixture(scope="function")
+def admin_user():
+    """Реальный администратор системы"""
+    return {
+        "email": "api1@gmail.com",
+        "password": "asdqwe123Q",
+        "fullName": "Super Admin",
+        "roles": ["SUPER_ADMIN"]
+    }
+
+@pytest.fixture(scope="function")
+def authenticated_admin(api_manager, admin_user):
+    """Логинится под реальным админом и устанавливает токен"""
+    api_manager.auth_api.authenticate(admin_user)
+    return admin_user
+
 @pytest.fixture(scope="session")
 def registered_user(api_manager, test_user):
     """Регистрирует пользователя и возвращает его данные с id."""
@@ -42,3 +58,10 @@ def registered_user(api_manager, test_user):
     registered_user = test_user.copy()
     registered_user["id"] = response_data["id"]
     return registered_user
+
+@pytest.fixture(scope="function")
+def authenticated_user(api_manager, registered_user):
+    """Регистрирует пользователя + выполняет логин + ставит токен"""
+    api_manager.auth_api.authenticate(registered_user)
+    return registered_user
+

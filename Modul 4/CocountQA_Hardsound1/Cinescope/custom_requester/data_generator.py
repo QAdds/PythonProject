@@ -42,3 +42,17 @@ class DataGenerator:
         random.shuffle(password)
 
         return ''.join(password)
+
+    @staticmethod
+    def generate_movie_data():
+        """Генерирует случайные данные для создания фильма."""
+        return {
+            "name": faker.sentence(nb_words=3)[:-1],
+            "price": 100,
+            "description": faker.paragraph(),
+            "year": random.randint(1900, 2026),
+            "location": "SPB",
+            "published": True,
+            "genreID": 1,
+            "genres": [random.choice(["Action", "Comedy", "Drama", "Horror", "Sci-Fi"])]
+        }

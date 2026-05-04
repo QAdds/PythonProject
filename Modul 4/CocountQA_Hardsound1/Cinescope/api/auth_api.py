@@ -37,8 +37,8 @@ class AuthAPI(CustomRequester):
         )
     def authenticate(self, user_creds):
         login_data = {
-            "email": user_creds[0],
-            "password": user_creds[1]
+            "email": user_creds['email'],
+            "password": user_creds['password']
         }
 
         response = self.login_user(login_data).json()
@@ -47,3 +47,14 @@ class AuthAPI(CustomRequester):
 
         token = response["accessToken"]
         self._update_session_headers(**{"authorization": "Bearer " + token})
+
+    def register_admin(self, admin_data: dict, expected_status: int = 201):
+        """
+        Регистрация пользователя с повышенными правами (ADMIN / SUPER_ADMIN).
+        """
+        return self.send_request(
+            method="POST",
+            endpoint=REGISTER_ENDPOINT,
+            data=admin_data,
+            expected_status=expected_status
+        )
