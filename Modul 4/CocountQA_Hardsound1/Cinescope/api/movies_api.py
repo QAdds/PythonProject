@@ -24,7 +24,17 @@ class MoviesAPI(CustomRequester):
         '''
         return self.send_request(method="POST", endpoint=MOVIES_ENDPOINT, data=movie_data, expected_status=expected_status)
 
+    def patch_movie(self, movie_id, movie_data, expected_status=200):
+        '''
+        PATCH /movies/{id} - Обновление фильма
+        '''
+        return self.send_request(method="PATCH", endpoint=f'{MOVIES_ENDPOINT}/{movie_id}', data=movie_data, expected_status=expected_status)
 
+    def delete_movie(self, movie_id, expected_status=200):
+        '''
+        DELETE /movies/{id} - Удаление фильма
+        '''
+        return self.send_request(method="DELETE", endpoint=f'{MOVIES_ENDPOINT}/{movie_id}', expected_status=expected_status)
 
 
 
