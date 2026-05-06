@@ -17,32 +17,31 @@ class DataGenerator:
     def generate_random_name():
         return f"{faker.first_name()} {faker.last_name()}"
 
-
     @staticmethod
     def generate_random_password():
         """
         Генерация пароля, соответствующего требованиям:
-        - Минимум 1 буква.
+        - Минимум 1 строчная буква.
+        - Минимум 1 заглавная буква.
         - Минимум 1 цифра.
         - Допустимые символы.
         - Длина от 8 до 20 символов.
         """
-    # Гарантируем наличие хотя бы одной буквы и одной цифры
-        letters = random.choice(string.ascii_letters)  # Одна буква
-        digits = random.choice(string.digits)  # Одна цифра
+        lowercase = random.choice(string.ascii_lowercase)
+        uppercase = random.choice(string.ascii_uppercase)
+        digit = random.choice(string.digits)
 
-    # Дополняем пароль случайными символами из допустимого набора
         special_chars = "?@#$%^&*|:"
         all_chars = string.ascii_letters + string.digits + special_chars
-        remaining_length = random.randint(6, 18)  # Остальная длина пароля
+
+        total_length = random.randint(8, 20)
+        remaining_length = total_length - 3
         remaining_chars = ''.join(random.choices(all_chars, k=remaining_length))
 
-    # Перемешиваем пароль для рандомизации
-        password = list(letters + digits + remaining_chars)
+        password = list(lowercase + uppercase + digit + remaining_chars)
         random.shuffle(password)
 
         return ''.join(password)
-
     @staticmethod
     def generate_movie_data():
         """Генерирует случайные данные для создания фильма."""

@@ -1,15 +1,11 @@
-import pytest
 from api.api_manager import ApiManager
 from faker import Faker
 
-from conftest import api_manager
-
 fake = Faker()
-
 
 class TestMoviesApi:
 
-    # ===================== ПОЗИТИВНЫЕ ТЕСТЫ =====================
+    # ПОЗИТИВНЫЕ ТЕСТЫ
 
     def test_create_movie_by_admin(self, api_manager: ApiManager, authenticated_admin):
         '''Тест проверяет создание фильма администратором'''
@@ -64,7 +60,7 @@ class TestMoviesApi:
         assert data["name"] == movie_data["name"]
 
 
-    # ===================== НЕГАТИВНЫЕ ТЕСТЫ =====================
+    # НЕГАТИВНЫЕ ТЕСТЫ
 
     def test_create_movie_without_auth(self, api_manager: ApiManager):
         '''Неавторизованный пользователь не может создать фильм (401)'''
@@ -155,54 +151,5 @@ class TestMoviesApi:
         movie_id=create_response.json()["id"]
         #удаляем фильм
         api_manager.movies_api.delete_movie(movie_id, expected_status=200)
+        #проверяем что фильм удален
         api_manager.movies_api.get_movie(movie_id, expected_status=404)
-
-    def test_regular_user_cannot_delete_movie(self, api_manager: ApiManager, authenticated_admin, authenticated_user):
-        '''Обычный пользователь не может удалять фильмы (403)'''
-        # Создаём фильм под админом
-        movie_data = {
-            "name": fake.name(),
-            "imageUrl": "https://example.com/image.jpg",
-            "price": 500,
-            "description": fake.text(),
-            "location": "SPB",
-            "published": True,
-            "genreId": 1
-        }
-        # Явно переключаемся на админа перед созданием
-        api_manager.movies_api.session.headers['authorization'] = f"Bearer {authenticated_admin['accessToken']}"
-
-        create_response = api_manager.movies_api.create_movie(movie_data, expected_status=201)
-        movie_id = create_response.json()["id"]
-
-        # === 2. Переключаемся на обычного пользователя ===
-        api_manager.movies_api.session.headers['authorization'] = f"Bearer {authenticated_user['accessToken']}"
-
-        # === 3. Пытаемся удалить ===
-        api_manager.movies_api.delete_movie(movie_id, expected_status=403)
-
-    def test_admin_can_delete_movie(self, api_manager: ApiManager, authenticated_admin):
-        '''SUPER_ADMIN может успешно удалить фильм'''
-        movie_data = {
-            "name": f"Фильм_для_удаления_{fake.unique.word().capitalize()}",
-            "imageUrl": "https://example.com/to_delete.jpg",
-            "price": 800,
-            "description": "Будет удалён",
-            "location": "SPB",
-            "published": True,
-            "genreId": 1
-        }
-
-        # Явно используем токен админа
-        api_manager.movies_api.session.headers['authorization'] = f"Bearer {authenticated_admin['accessToken']}"
-
-        create_response = api_manager.movies_api.create_movie(movie_data, expected_status=201)
-        movie_id = create_response.json()["id"]
-
-        # Удаляем
-        api_manager.movies_api.delete_movie(movie_id, expected_status=200)
-
-        # Проверяем, что фильм удалён
-        api_manager.movies_api.get_movie(movie_id, expected_status=404)
-
-        

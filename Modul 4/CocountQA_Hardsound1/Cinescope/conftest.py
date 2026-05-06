@@ -2,24 +2,23 @@ from faker import Faker
 import pytest
 import requests
 from api.api_manager import ApiManager
-from constants import BASE_URL, REGISTER_ENDPOINT
 from custom_requester.data_generator import DataGenerator
 
 fake = Faker()
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def session():
     """Фикстура для создания HTTP-сессии."""
     http_session = requests.Session()
     yield http_session
     http_session.close()
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def api_manager(session):
     """Фикстура для создания экземпляра ApiManager."""
     return ApiManager(session)
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def test_user():
     """Генерация случайного пользователя для тестов."""
     random_email = DataGenerator.generate_random_email()
@@ -50,7 +49,7 @@ def authenticated_admin(api_manager, admin_user):
     api_manager.auth_api.authenticate(admin_user)
     return admin_user
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def registered_user(api_manager, test_user):
     """Регистрирует пользователя и возвращает его данные с id."""
     response = api_manager.auth_api.register_user(test_user)

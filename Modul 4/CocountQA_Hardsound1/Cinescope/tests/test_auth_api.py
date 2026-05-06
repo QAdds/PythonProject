@@ -1,13 +1,11 @@
-import pytest
-import requests
-from constants import BASE_URL, HEADERS, REGISTER_ENDPOINT,  LOGIN_ENDPOINT
-from custom_requester.custom_requester import CustomRequester
 from api.api_manager import ApiManager
-from example import response
 from faker import Faker
 fake = Faker()
 
 class TestAuthAPI:
+
+    # ПОЗИТИВНЫЕ ТЕСТЫ
+
     def test_register_user(self, api_manager: ApiManager, test_user):
         """
         Тест на регистрацию пользователя.
@@ -15,11 +13,11 @@ class TestAuthAPI:
         response = api_manager.auth_api.register_user(test_user)
         response_data = response.json()
 
-        # Проверки
         assert response_data["email"] == test_user["email"], "Email не совпадает"
         assert "id" in response_data, "ID пользователя отсутствует в ответе"
         assert "roles" in response_data, "Роли пользователя отсутствуют в ответе"
         assert "USER" in response_data["roles"], "Роль USER должна быть у пользователя"
+        assert response.status_code == 201, "Статус код не 201"
 
     def test_register_and_login_user(self, api_manager: ApiManager, registered_user):
         """
@@ -34,9 +32,7 @@ class TestAuthAPI:
         assert response_data['user']["email"] == registered_user["email"], 'Email не совпадает'
         assert 'accessToken' in response_data, 'Токен доступа отсутствует в ответе'
 
-        # Проверки
-        assert "accessToken" in response_data, "Токен доступа отсутствует в ответе"
-        assert response_data["user"]["email"] == registered_user["email"], "Email не совпадает"
+    # НЕГАТИВНЫЕ ТЕСТЫ
 
     def test_error_password(self, api_manager: ApiManager, registered_user):
         '''
@@ -76,7 +72,8 @@ class TestAuthAPI:
         response = api_manager.auth_api.register_user(duplicate_user, expected_status=409)
         data = response.json()
 
-        assert data.get("statusCode") == 409 or "уже существует" in data.get("message", "")
+        assert data.get("statusCode") == 409
+        assert "Пользователь с таким email уже зарегистрирован" in data.get("message", "")
 
     def test_register_admin_by_superadmin(self, api_manager: ApiManager, authenticated_admin):
         """
@@ -94,4 +91,3 @@ class TestAuthAPI:
         response = api_manager.auth_api.register_admin(admin_data, expected_status=400)
         data = response.json()
         assert data.get("statusCode") == 400
-        print(f"Получен ожидаемый статус 400. Сообщение: {data.get('message')}")
