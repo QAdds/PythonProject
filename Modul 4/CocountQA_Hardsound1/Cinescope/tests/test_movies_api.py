@@ -62,10 +62,10 @@ class TestMoviesApi:
 
     # НЕГАТИВНЫЕ ТЕСТЫ
 
-    def test_create_movie_without_auth(self, api_manager: ApiManager):
+    def test_create_movie_without_auth(self, guest_api_manager: ApiManager):
         '''Неавторизованный пользователь не может создать фильм (401)'''
-        if 'authorization' in api_manager.movies_api.session.headers:
-            del api_manager.movies_api.session.headers['authorization']
+        if 'authorization' in guest_api_manager.movies_api.session.headers:
+            del guest_api_manager.movies_api.session.headers['authorization']
 
         movie_data = {
             "name": "Movie without auth",
@@ -77,7 +77,7 @@ class TestMoviesApi:
             "genreId": 1
         }
 
-        api_manager.movies_api.create_movie(movie_data, expected_status=401)
+        guest_api_manager.movies_api.create_movie(movie_data, expected_status=401)
 
 
     def test_create_movie_by_regular_user(self, api_manager: ApiManager, authenticated_user):
