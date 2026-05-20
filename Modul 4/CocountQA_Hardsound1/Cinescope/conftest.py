@@ -8,8 +8,11 @@ from api.api_manager import ApiManager
 from custom_requester.data_generator import DataGenerator
 from entities.user import User
 from enums.roles import Roles
+from models.base_models import TestUser, RegisteredUser
 from resources.user_creds import SuperAdminCreds
-from enums.roles import Roles
+from sqlalchemy.orm import Session
+from db_requester.db_client import get_db_session
+from db_requester.db_helpers import DBHelper
 
 load_dotenv()
 fake = Faker()
@@ -45,17 +48,17 @@ def guest_api_manager(guest_session):
 
 
 @pytest.fixture(scope="function")
-def test_user():
+def test_user() -> TestUser:
     """Генерация случайного пользователя для тестов."""
     random_password = DataGenerator.generate_random_password()
 
-    return {
-        "email": DataGenerator.generate_random_email(),
-        "fullName": DataGenerator.generate_random_name(),
-        "password": random_password,
-        "passwordRepeat": random_password,
-        "roles": [Roles.USER.value]
-    }
+    return TestUser(
+        email=DataGenerator.generate_random_email(),
+        fullName=DataGenerator.generate_random_name(),
+        password=random_password,
+        passwordRepeat=random_password,
+        roles=[Roles.USER],
+    )
 
 
 @pytest.fixture(scope="function")
@@ -65,7 +68,7 @@ def admin_user():
     password = os.getenv("SUPER_ADMIN_PASSWORD")
 
     if not email or not password:
-        raise ValueError("Не заданы ADMIN_EMAIL / ADMIN_PASSWORD в переменных окружения")
+        raise ValueError("Не заданы SUPER_ADMIN_USERNAME / SUPER_ADMIN_PASSWORD в переменных окружения")
 
     return {
         "email": email,
@@ -83,43 +86,57 @@ def authenticated_admin(api_manager, admin_user):
 
 
 @pytest.fixture(scope="function")
-def registered_user(api_manager, test_user):
+def registered_user(api_manager, test_user: TestUser) -> RegisteredUser:
     """Регистрация пользователя и возврат данных с id."""
     response = api_manager.auth_api.register_user(test_user)
     response_data = response.json()
 
-    user_data = test_user.copy()
-    user_data["id"] = response_data["id"]
-    return user_data
-
+    return RegisteredUser(
+        id=response_data["id"],
+        email=test_user.email,
+        fullName=test_user.fullName,
+        password=test_user.password,
+        passwordRepeat=test_user.passwordRepeat,
+        roles=test_user.roles,
+        verified=test_user.verified,
+        banned=test_user.banned,
+    )
 
 @pytest.fixture(scope="function")
-def authenticated_user(api_manager, registered_user):
+def authenticated_user(api_manager, registered_user: RegisteredUser):
     """Регистрация пользователя, логин и установка токена."""
     api_manager.auth_api.authenticate(registered_user)
     return registered_user
 
 @pytest.fixture(scope="function")
-def other_user(api_manager):
-    '''Генерирует случайные email и fullName'''
-    user_data = {
-        "email": fake.email(),
-        "fullName": fake.name(),
-        "password": "Qwerty123!",
-        "passwordRepeat": "Qwerty123!",
-        "roles": [Roles.USER.value]
-    }
+def other_user(api_manager) -> RegisteredUser:
+    """Генерирует случайные email и fullName."""
+    user_data = TestUser(
+        email=fake.email(),
+        fullName=fake.name(),
+        password="Qwerty123!",
+        passwordRepeat="Qwerty123!",
+        roles=[Roles.USER]
+    )
 
     response = api_manager.auth_api.register_user(user_data)
     response_data = response.json()
 
-    user_data["id"] = response_data["id"]
-    return user_data
+    return RegisteredUser(
+        id=response_data["id"],
+        email=user_data.email,
+        fullName=user_data.fullName,
+        password=user_data.password,
+        passwordRepeat=user_data.passwordRepeat,
+        roles=user_data.roles,
+        verified=user_data.verified,
+        banned=user_data.banned,
+    )
 
 # МОДУЛЬ 5
 
 @pytest.fixture(scope='function')
-def user_session(api_manager):
+def user_session():
     '''управляет жизненным циклом пользовательских сессий для API-тестов'''
     user_pool = []
 
@@ -153,23 +170,21 @@ def super_admin(user_session):
     return super_admin
 
 @pytest.fixture(scope="function")
-def creation_user_data(test_user):
+def creation_user_data(test_user: TestUser) -> TestUser:
     '''Обновленная фикстура ("test_user" Генерация случайного пользователя для тестов)'''
-    updated_data = test_user.copy()
-    updated_data.update({
+    return test_user.model_copy(update={
         "verified": True,
         "banned": False
     })
-    return updated_data
 
 @pytest.fixture
-def common_user(user_session, super_admin, creation_user_data):
+def common_user(user_session, super_admin, creation_user_data: TestUser):
     '''создание обычного юзера с ролью USER'''
     new_session = user_session()
 
     common_user = User(
-        email=creation_user_data["email"],
-        password=creation_user_data["password"],
+        email=creation_user_data.email,
+        password=creation_user_data.password,
         roles=[Roles.USER.value],
         api=new_session
     )
@@ -180,3 +195,15 @@ def common_user(user_session, super_admin, creation_user_data):
         "password": common_user.password
     })
     return common_user
+
+
+@pytest.fixture(scope="function")
+def db_session() -> Session:
+    '''Фикстура для БД'''
+    db_session = get_db_session()
+    yield db_session
+    db_session.close()
+
+@pytest.fixture(scope="function")
+def db_helper(db_session) -> DBHelper:
+    return DBHelper(db_session)
