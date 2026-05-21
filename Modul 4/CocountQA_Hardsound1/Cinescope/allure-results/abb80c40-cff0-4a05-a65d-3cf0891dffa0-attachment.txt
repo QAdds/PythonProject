@@ -1,0 +1,49 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_auth_api.py::TestAuthAPI::test_registration_with_existing_email (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/register' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 142' \
+-d '{"email": "kek2yec1wb6@gmail.com", "fullName": "Craig Mcclure", "password": "05FjOVDX7u2", "passwordRepeat": "05FjOVDX7u2", "roles": ["USER"]}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "c2769ff9-32cf-402b-baed-632e33c41a73",
+    "email": "kek2yec1wb6@gmail.com",
+    "fullName": "Craig Mcclure",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2026-05-20T07:27:04.436Z"
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_auth_api.py::TestAuthAPI::test_registration_with_existing_email[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/register' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 145' \
+-d '{"email": "kek2yec1wb6@gmail.com", "fullName": "Duplicate User", "password": "Password123!", "passwordRepeat": "Password123!", "roles": ["USER"]}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:63 	STATUS_CODE: [31m409[0m
+	DATA: [31m{
+    "message": "Пользователь с таким email уже зарегистрирован",
+    "error": "Conflict",
+    "statusCode": 409
+}[0m
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================

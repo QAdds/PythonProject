@@ -1,0 +1,65 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_create_movie_by_admin (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "734964ec-4d6a-4789-839f-75797141e73e",
+        "email": "api1@gmail.com",
+        "fullName": "Жмышенко Валерий Альбертович",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDMwLCJleHAiOjE3NzkyNjM4MzB9.h35FxSu974D1Z7psl7Gab5Se9FEkDj375yk87Kux6n0",
+    "refreshToken": "8b7ea00d-6f7d-4ab4-9599-145728ac766e",
+    "expiresIn": 1779263830319
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_create_movie_by_admin[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDMwLCJleHAiOjE3NzkyNjM4MzB9.h35FxSu974D1Z7psl7Gab5Se9FEkDj375yk87Kux6n0' \
+-H 'Content-Length: 337' \
+-d '{"name": "Brandon Park", "imageUrl": "https://example.com/image.jpg", "price": 100, "description": "End manage dark sometimes whole indicate evidence. Toward research fire.\nBill friend popular cold around month president. Public born section economic system national would building.", "location": "SPB", "published": true, "genreId": 1}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 49852,
+    "name": "Brandon Park",
+    "price": 100,
+    "description": "End manage dark sometimes whole indicate evidence. Toward research fire.\nBill friend popular cold around month president. Public born section economic system national would building.",
+    "imageUrl": "https://example.com/image.jpg",
+    "location": "SPB",
+    "published": true,
+    "rating": 0,
+    "genreId": 1,
+    "createdAt": "2026-05-20T07:27:10.855Z",
+    "genre": {
+        "name": "Драма"
+    }
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================

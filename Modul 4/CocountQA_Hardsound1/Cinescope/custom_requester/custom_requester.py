@@ -2,6 +2,8 @@ import json
 import logging
 import os
 
+from pydantic import BaseModel
+
 
 class CustomRequester:
     """
@@ -17,6 +19,7 @@ class CustomRequester:
         self.session = session
         self.base_url = base_url
         self.headers = self.base_headers.copy()
+        self.session.headers.update(self.base_headers)
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
 
@@ -35,7 +38,7 @@ class CustomRequester:
             body = ""
             if hasattr(request, "body") and request.body is not None:
                 request_body = request.body.decode("utf-8") if isinstance(request.body, bytes) else request.body
-                body = f"-d '{request_body}' \n" if request_body != "{}" else ""
+                body = f"-d '{request_body}' \\\n" if request_body != "{}" else ""
 
             self.logger.info(f"\n{'=' * 40} REQUEST {'=' * 40}")
             self.logger.info(
@@ -47,7 +50,11 @@ class CustomRequester:
 
             response_data = response.text
             try:
-                response_data = json.dumps(json.loads(response.text), indent=4, ensure_ascii=False)
+                response_data = json.dumps(
+                    json.loads(response.text),
+                    indent=4,
+                    ensure_ascii=False
+                )
             except json.JSONDecodeError:
                 pass
 
@@ -63,18 +70,22 @@ class CustomRequester:
                     f"\tDATA:\n{response_data}"
                 )
             self.logger.info(f"{'=' * 80}\n")
+
         except Exception as e:
             self.logger.error(f"\nLogging failed: {type(e)} - {e}")
 
-    def send_request(self, method, endpoint, data=None, expected_status=200, need_logging=True):
+    def send_request(self, method, endpoint, data=None, params=None, expected_status=200):
         """
         Универсальный метод для отправки HTTP-запросов.
         """
         url = f"{self.base_url}{endpoint}"
-        response = self.session.request(method, url, json=data, headers=self.headers)
 
-        if need_logging:
-            self.log_request_and_response(response)
+        if isinstance(data, BaseModel):
+            data = data.model_dump(mode="json", exclude_unset=True)
+
+        response = self.session.request(method, url, json=data, params=params)
+
+        self.log_request_and_response(response)
 
         if response.status_code != expected_status:
             raise ValueError(
