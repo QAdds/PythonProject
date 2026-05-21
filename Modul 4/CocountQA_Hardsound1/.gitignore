@@ -1,2 +1,13 @@
-.env
+.idea/
+.vscode/
+.venv/
+.DS_Store
+/venv/
 __pycache__/
+*.db
+*.xlsx
+*.log
+*.csv
+.token
+.env
+
