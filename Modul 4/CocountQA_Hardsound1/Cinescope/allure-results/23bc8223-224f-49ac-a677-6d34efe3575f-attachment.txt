@@ -1,0 +1,19 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_get_nonexistent_movie[0m
+curl -X GET 'https://api.dev-cinescope.coconutqa.ru/movies/9999999' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:63 	STATUS_CODE: [31m404[0m
+	DATA: [31m{
+    "message": "Фильм не найден",
+    "error": "Not Found",
+    "statusCode": 404
+}[0m
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================

@@ -1,0 +1,111 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserAPI::test_delete_user_without_permission (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/register' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 164' \
+-d '{"email": "kekf0hhuxkk@gmail.com", "fullName": "Alexander Alvarez", "password": "VHE7^0BknCA&C1N#b$jy", "passwordRepeat": "VHE7^0BknCA&C1N#b$jy", "roles": ["USER"]}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "e9799761-a5aa-4739-a58e-c4110d7325f2",
+    "email": "kekf0hhuxkk@gmail.com",
+    "fullName": "Alexander Alvarez",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2026-05-20T07:27:24.827Z"
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserAPI::test_delete_user_without_permission (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 70' \
+-d '{"email": "kekf0hhuxkk@gmail.com", "password": "VHE7^0BknCA&C1N#b$jy"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "e9799761-a5aa-4739-a58e-c4110d7325f2",
+        "email": "kekf0hhuxkk@gmail.com",
+        "fullName": "Alexander Alvarez",
+        "roles": [
+            "USER"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5Nzk5NzYxLWE1YWEtNDczOS1hNThlLWM0MTEwZDczMjVmMiIsImVtYWlsIjoia2VrZjBoaHV4a2tAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDQ1LCJleHAiOjE3NzkyNjM4NDV9.hTC5ypVshUN2bKvtcRJN0lRtOfWl5Mv7EPQUSHDp4L4",
+    "refreshToken": "47f599fe-f4e2-47dc-b809-e523185def6f",
+    "expiresIn": 1779263845246
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserAPI::test_delete_user_without_permission (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/register' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5Nzk5NzYxLWE1YWEtNDczOS1hNThlLWM0MTEwZDczMjVmMiIsImVtYWlsIjoia2VrZjBoaHV4a2tAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDQ1LCJleHAiOjE3NzkyNjM4NDV9.hTC5ypVshUN2bKvtcRJN0lRtOfWl5Mv7EPQUSHDp4L4' \
+-H 'Cookie: refresh_token=47f599fe-f4e2-47dc-b809-e523185def6f' \
+-H 'Content-Length: 143' \
+-d '{"email": "kimberly16@example.com", "fullName": "Krystal Goodwin", "password": "Qwerty123!", "passwordRepeat": "Qwerty123!", "roles": ["USER"]}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "5018099d-478e-4759-8dae-94c9fa0f46b6",
+    "email": "kimberly16@example.com",
+    "fullName": "Krystal Goodwin",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2026-05-20T07:27:25.527Z"
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserAPI::test_delete_user_without_permission[0m
+curl -X DELETE 'https://auth.dev-cinescope.coconutqa.ru/user/5018099d-478e-4759-8dae-94c9fa0f46b6' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5Nzk5NzYxLWE1YWEtNDczOS1hNThlLWM0MTEwZDczMjVmMiIsImVtYWlsIjoia2VrZjBoaHV4a2tAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDQ1LCJleHAiOjE3NzkyNjM4NDV9.hTC5ypVshUN2bKvtcRJN0lRtOfWl5Mv7EPQUSHDp4L4' \
+-H 'Cookie: refresh_token=47f599fe-f4e2-47dc-b809-e523185def6f' \
+-H 'Content-Length: 0' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:63 	STATUS_CODE: [31m403[0m
+	DATA: [31m{
+    "message": "Forbidden",
+    "statusCode": 403
+}[0m
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================

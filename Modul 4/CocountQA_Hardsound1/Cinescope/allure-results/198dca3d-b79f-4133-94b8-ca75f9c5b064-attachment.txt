@@ -1,0 +1,99 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_admin_can_update_movie (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "734964ec-4d6a-4789-839f-75797141e73e",
+        "email": "api1@gmail.com",
+        "fullName": "Жмышенко Валерий Альбертович",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDM4LCJleHAiOjE3NzkyNjM4Mzh9.SyZYLcmIkCP8DIz1jhBWkensxFrTqrEoejGIqftXAok",
+    "refreshToken": "c9d6e4cf-ece5-44f3-a76e-1f37d5f71051",
+    "expiresIn": 1779263838855
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_admin_can_update_movie[0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDM4LCJleHAiOjE3NzkyNjM4Mzh9.SyZYLcmIkCP8DIz1jhBWkensxFrTqrEoejGIqftXAok' \
+-H 'Content-Length: 224' \
+-d '{"name": "Stacy Pittman", "imageUrl": "https://example.com/image.jpg", "price": 500, "description": "Employee country camera catch. Less receive pretty happen close pass.", "location": "SPB", "published": true, "genreId": 1}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": 49855,
+    "name": "Stacy Pittman",
+    "price": 500,
+    "description": "Employee country camera catch. Less receive pretty happen close pass.",
+    "imageUrl": "https://example.com/image.jpg",
+    "location": "SPB",
+    "published": true,
+    "rating": 0,
+    "genreId": 1,
+    "createdAt": "2026-05-20T07:27:19.313Z",
+    "genre": {
+        "name": "Драма"
+    }
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_admin_can_update_movie[0m
+curl -X PATCH 'https://api.dev-cinescope.coconutqa.ru/movies/49855' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDM4LCJleHAiOjE3NzkyNjM4Mzh9.SyZYLcmIkCP8DIz1jhBWkensxFrTqrEoejGIqftXAok' \
+-H 'Content-Length: 259' \
+-d '{"name": "Justin Smith", "price": 500, "description": "Really tell hospital force bank defense summer. Born media measure program.\nBetter space memory her. Certain range approach billion couple candidate.\nTheir pattern range have cause.", "location": "MSK"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "id": 49855,
+    "name": "Justin Smith",
+    "description": "Really tell hospital force bank defense summer. Born media measure program.\nBetter space memory her. Certain range approach billion couple candidate.\nTheir pattern range have cause.",
+    "genreId": 1,
+    "imageUrl": "https://example.com/image.jpg",
+    "price": 500,
+    "rating": 0,
+    "location": "MSK",
+    "published": true,
+    "createdAt": "2026-05-20T07:27:19.313Z",
+    "genre": {
+        "name": "Драма"
+    }
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================

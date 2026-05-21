@@ -1,0 +1,115 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserRoleModel::test_get_user_by_id_common_user (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "734964ec-4d6a-4789-839f-75797141e73e",
+        "email": "api1@gmail.com",
+        "fullName": "Жмышенко Валерий Альбертович",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDQ5LCJleHAiOjE3NzkyNjM4NDl9.KlBP-6JfMpaZaGAiFYQwHNb1E_RTrf0cK0padKs-bIc",
+    "refreshToken": "8d662a75-703f-449c-bca5-736e44f78b05",
+    "expiresIn": 1779263849542
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserRoleModel::test_get_user_by_id_common_user (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/user' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDQ5LCJleHAiOjE3NzkyNjM4NDl9.KlBP-6JfMpaZaGAiFYQwHNb1E_RTrf0cK0padKs-bIc' \
+-H 'Cookie: refresh_token=8d662a75-703f-449c-bca5-736e44f78b05' \
+-H 'Content-Length: 183' \
+-d '{"email": "kek1g4sfxr2@gmail.com", "fullName": "Raymond Michael", "password": "TaIc2k*MuEKBl", "passwordRepeat": "TaIc2k*MuEKBl", "roles": ["USER"], "verified": true, "banned": false}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m201[0m
+	DATA:
+{
+    "id": "e12bdd64-7be6-4a56-8f5b-27d5e0fed6a2",
+    "email": "kek1g4sfxr2@gmail.com",
+    "fullName": "Raymond Michael",
+    "verified": true,
+    "banned": false,
+    "roles": [
+        "USER"
+    ],
+    "createdAt": "2026-05-20T07:27:29.834Z"
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserRoleModel::test_get_user_by_id_common_user (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 63' \
+-d '{"email": "kek1g4sfxr2@gmail.com", "password": "TaIc2k*MuEKBl"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "e12bdd64-7be6-4a56-8f5b-27d5e0fed6a2",
+        "email": "kek1g4sfxr2@gmail.com",
+        "fullName": "Raymond Michael",
+        "roles": [
+            "USER"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUxMmJkZDY0LTdiZTYtNGE1Ni04ZjViLTI3ZDVlMGZlZDZhMiIsImVtYWlsIjoia2VrMWc0c2Z4cjJAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDUwLCJleHAiOjE3NzkyNjM4NTB9.GTFTJuKvvWNCnFRP0QlZxZiLXAl9p96aEeNil_-lPsA",
+    "refreshToken": "084d6e94-c704-47cc-82f3-25356461272a",
+    "expiresIn": 1779263850515
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_user_api.py::TestUserRoleModel::test_get_user_by_id_common_user[0m
+curl -X GET 'https://auth.dev-cinescope.coconutqa.ru/user/kek1g4sfxr2@gmail.com' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImUxMmJkZDY0LTdiZTYtNGE1Ni04ZjViLTI3ZDVlMGZlZDZhMiIsImVtYWlsIjoia2VrMWc0c2Z4cjJAZ21haWwuY29tIiwicm9sZXMiOlsiVVNFUiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDUwLCJleHAiOjE3NzkyNjM4NTB9.GTFTJuKvvWNCnFRP0QlZxZiLXAl9p96aEeNil_-lPsA' \
+-H 'Cookie: refresh_token=084d6e94-c704-47cc-82f3-25356461272a' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:63 	STATUS_CODE: [31m403[0m
+	DATA: [31m{
+    "message": "Forbidden resource",
+    "error": "Forbidden",
+    "statusCode": 403
+}[0m
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================

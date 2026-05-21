@@ -1,0 +1,56 @@
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_create_movie_invalid_data[empty_image_url] (setup)[0m
+curl -X POST 'https://auth.dev-cinescope.coconutqa.ru/login' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'Content-Length: 53' \
+-d '{"email": "api1@gmail.com", "password": "asdqwe123Q"}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:68 	STATUS_CODE: [32m200[0m
+	DATA:
+{
+    "user": {
+        "id": "734964ec-4d6a-4789-839f-75797141e73e",
+        "email": "api1@gmail.com",
+        "fullName": "Жмышенко Валерий Альбертович",
+        "roles": [
+            "USER",
+            "ADMIN",
+            "SUPER_ADMIN"
+        ]
+    },
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDM2LCJleHAiOjE3NzkyNjM4MzZ9.jWehmeLkEnR2g8o9uwSnWeNge6BDGXQu3ws_7JF8OZc",
+    "refreshToken": "f5eb70b3-83ad-4dc3-b211-daa404850fd0",
+    "expiresIn": 1779263836136
+}
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:43 
+======================================== REQUEST ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:44 [32mpytest Cinescope/tests/test_movies_api.py::TestMoviesApi::test_create_movie_invalid_data[empty_image_url][0m
+curl -X POST 'https://api.dev-cinescope.coconutqa.ru/movies' \
+-H 'User-Agent: python-requests/2.32.5' \
+-H 'Accept-Encoding: gzip, deflate, zstd' \
+-H 'Accept: application/json' \
+-H 'Connection: keep-alive' \
+-H 'Content-Type: application/json' \
+-H 'authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjczNDk2NGVjLTRkNmEtNDc4OS04MzlmLTc1Nzk3MTQxZTczZSIsImVtYWlsIjoiYXBpMUBnbWFpbC5jb20iLCJyb2xlcyI6WyJVU0VSIiwiQURNSU4iLCJTVVBFUl9BRE1JTiJdLCJ2ZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNzc5MjYyMDM2LCJleHAiOjE3NzkyNjM4MzZ9.jWehmeLkEnR2g8o9uwSnWeNge6BDGXQu3ws_7JF8OZc' \
+-H 'Content-Length: 132' \
+-d '{"name": "Bad image movie", "imageUrl": "", "price": 100, "description": "test", "location": "SPB", "published": true, "genreId": 1}' \
+
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:61 
+======================================== RESPONSE ========================================
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:63 	STATUS_CODE: [31m400[0m
+	DATA: [31m{
+    "message": [
+        "Неверная ссылка"
+    ],
+    "error": "Bad Request",
+    "statusCode": 400
+}[0m
+[32mINFO    [0m custom_requester.custom_requester:custom_requester.py:72 ================================================================================
