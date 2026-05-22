@@ -75,6 +75,11 @@ class TestMoviesApi:
 
         assert data["id"] == movie_id
         assert data["name"] == movie_data["name"]
+        assert data["price"] == movie_data["price"]
+        assert data["description"] == movie_data["description"]
+        assert data["location"] == movie_data["location"]
+        assert data["published"] is True
+        assert data["genreId"] == 1
 
     # НЕГАТИВНЫЕ ТЕСТЫ
 
